@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5f5f2" />
+  <meta name="description" content="Aarush Sharma — student, aspiring developer and robotics enthusiast." />
+  <title>Aarush Sharma — Developer & Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f5f2; --paper: #fff; --ink: #151716; --muted: #737873;
+      --line: #e4e6e1; --accent: #526b5b; --soft: #e9eee9;
+      --mono: "DM Mono", monospace; --sans: "Manrope", system-ui, sans-serif;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .shell { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    .topbar { position: sticky; top: 0; z-index: 20; background: rgba(245,245,242,.86); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(21,23,22,.08); }
+    nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-weight: 800; letter-spacing: -.07em; font-size: 1.15rem; }
+    .brand span { color: var(--accent); }
+    .navlinks { display: flex; gap: 28px; align-items: center; }
+    .navlinks a { color: #666d67; font-size: .82rem; font-weight: 600; transition: color .2s; }
+    .navlinks a:hover { color: var(--ink); }
+    .nav-cta { border: 1px solid #cbd2ca; border-radius: 999px; padding: 9px 15px; color: var(--ink) !important; }
+    .hero { min-height: 690px; padding: 94px 0 84px; display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 48px; }
+    .eyebrow, .kicker { color: var(--accent); font: 500 .7rem var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    h1 { margin: 21px 0 22px; font-size: clamp(3.35rem, 7.2vw, 6.5rem); line-height: .99; letter-spacing: -.085em; font-weight: 700; }
+    h1 span { color: #87958a; }
+    .lead { max-width: 560px; color: #666e68; font-size: 1.02rem; line-height: 1.9; }
+    .actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 32px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 19px; border: 1px solid var(--ink); border-radius: 999px; font-size: .82rem; font-weight: 700; transition: transform .25s, background .25s, color .25s; }
+    .button:hover { transform: translateY(-3px); }
+    .button.primary { background: var(--ink); color: white; }
+    .button.primary:hover { background: var(--accent); border-color: var(--accent); }
+    .button.secondary { border-color: #d5d9d3; }
+    .hero-visual { min-height: 440px; position: relative; border-radius: 28px; overflow: hidden; background: radial-gradient(circle at 50% 45%, #e8ede7 0, #eff1ec 40%, #e5e9e2 100%); border: 1px solid #e1e5de; isolation: isolate; }
+    #particle-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .interaction-hint { position: absolute; z-index: 3; top: 20px; left: 50%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; padding: 10px 14px; border: 1px solid rgba(82,107,91,.24); border-radius: 999px; background: rgba(255,255,255,.78); color: #405747; box-shadow: 0 8px 24px rgba(42,62,47,.08); font: 500 .65rem var(--mono); letter-spacing: .045em; backdrop-filter: blur(10px); pointer-events: none; }
+    .interaction-hint .hint-icon { display: grid; place-items: center; width: 21px; height: 21px; border-radius: 50%; background: #e5ede5; font: .9rem var(--sans); animation: hint-pulse 1.8s ease-in-out infinite; }
+    @keyframes hint-pulse { 0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(82,107,91,.16); } 50% { transform: scale(1.08); box-shadow: 0 0 0 6px rgba(82,107,91,0); } }
+    .visual-label { position: absolute; z-index: 2; left: 24px; right: 24px; bottom: 21px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #53645a; font: .65rem var(--mono); letter-spacing: .08em; text-transform: uppercase; pointer-events: none; }
+    .visual-label .live { display: flex; align-items: center; gap: 7px; }
+    .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #67846f; box-shadow: 0 0 0 4px #67846f20; }
+    section { padding: 100px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.065em; line-height: 1.1; margin: 10px 0 0; }
+    .section-intro { max-width: 390px; color: var(--muted); font-size: .9rem; margin: 0; }
+    .about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; }
+    .panel { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 30px; }
+    .panel p { color: #69716b; margin: 0 0 16px; font-size: .93rem; }
+    .panel p:last-child { margin-bottom: 0; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .fact { min-height: 112px; padding: 19px; border: 1px solid var(--line); border-radius: 17px; background: #f9faf7; }
+    .fact strong { display: block; color: var(--accent); font-size: 1.15rem; letter-spacing: -.04em; }
+    .fact small { color: var(--muted); font-size: .72rem; }
+    .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .skill { padding: 23px; border: 1px solid var(--line); border-radius: 17px; background: var(--paper); transition: transform .25s, box-shadow .25s; }
+    .skill:hover { transform: translateY(-5px); box-shadow: 0 16px 35px #18251b0b; }
+    .skill-index { color: #9ba49c; font: .68rem var(--mono); }
+    .skill h3 { margin: 17px 0 7px; font-size: 1rem; letter-spacing: -.03em; }
+    .skill p { color: var(--muted); margin: 0; font-size: .82rem; line-height: 1.75; }
+    .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .project { position: relative; overflow: hidden; background: var(--paper); border: 1px solid var(--line); border-radius: 19px; padding: 26px; transition: transform .25s, box-shadow .25s; }
+    .project:hover { transform: translateY(-4px); box-shadow: 0 18px 40px #18251b0b; }
+    .project-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .project h3 { font-size: 1.1rem; margin: 0; letter-spacing: -.04em; }
+    .status { white-space: nowrap; color: var(--accent); background: var(--soft); border-radius: 99px; padding: 5px 10px; font: .62rem var(--mono); }
+    .project p { color: var(--muted); font-size: .85rem; min-height: 72px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tags span { color: #68716a; background: #f1f3ef; border-radius: 6px; padding: 5px 9px; font: .65rem var(--mono); }
+    .project-link { display: inline-flex; margin-top: 20px; font-size: .78rem; font-weight: 700; color: var(--accent); }
+    .contact { display: flex; justify-content: space-between; align-items: center; gap: 30px; padding: 42px; background: #e9eee8; border: 1px solid #dce4db; border-radius: 23px; }
+    .contact h2 { max-width: 500px; }
+    .contact p { color: #68716a; font-size: .88rem; margin-bottom: 0; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 9px; }
+    footer { padding: 27px 0; color: #8b938c; font: .68rem var(--mono); border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 800px) {
+      .shell { width: min(var(--max), calc(100% - 36px)); }
+      .hero { min-height: auto; padding: 70px 0 55px; grid-template-columns: 1fr; gap: 35px; }
+      .hero-visual { min-height: 390px; }
+      section { padding: 75px 0; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact { align-items: flex-start; flex-direction: column; padding: 30px; }
+      .navlinks { gap: 17px; }
+    }
+    @media (max-width: 560px) {
+      .shell { width: calc(100% - 34px); }
+      nav { min-height: 66px; }
+      .navlinks { gap: 13px; }
+      .navlinks a { font-size: .7rem; }
+      .nav-cta { display: none; }
+      .hero { padding-top: 58px; }
+      h1 { font-size: clamp(3.25rem, 15vw, 4.8rem); }
+      .lead { font-size: .91rem; }
+      .hero-visual { min-height: 330px; border-radius: 22px; }
+      .visual-label { left: 16px; right: 16px; bottom: 15px; font-size: .56rem; }
+      .interaction-hint { top: 15px; padding: 8px 11px; font-size: .56rem; }
+      section { padding: 65px 0; }
+      .section-head { align-items: flex-start; flex-direction: column; margin-bottom: 25px; }
+      .panel { padding: 23px; }
+      .skills, .projects { grid-template-columns: 1fr; }
+      .project p { min-height: 0; }
+      .contact { padding: 25px; }
+      .contact-links { flex-direction: column; width: 100%; }
+      .contact-links .button { width: 100%; }
+      .footer-inner { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="shell">
+      <a class="brand" href="#home" aria-label="Aarush home">AARUSH<span>.</span></a>
+      <div class="navlinks" aria-label="Main navigation">
+        <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a class="nav-cta" href="#contact">Let's connect ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="shell hero" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow">Student · Web Developer · Robotics Enthusiast</div>
+        <h1>Building ideas<br>into <span>real things.</span></h1>
+        <p class="lead">Hi, I'm Aarush. I'm a student interested in web development, Python programming and robotics. I learn by building real projects — from a Python chess game to an Arduino robotic arm and an Iron Man helmet model.</p>
+        <div class="actions">
+          <a class="button primary" href="#projects">Explore my projects <span aria-hidden="true">↗</span></a>
+          <a class="button secondary" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Interactive 3D particle sculpture. Move your pointer or finger to interact.">
+        <canvas id="particle-canvas"></canvas>
+        <div class="interaction-hint"><span class="hint-icon">✳</span><span>MOVE CURSOR OR TOUCH TO INTERACT</span></div>
+        <div class="visual-label"><span>Interactive particle field</span><span class="live"><i class="live-dot"></i> Live simulation</span></div>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="shell">
+        <div class="section-head reveal"><div><div class="kicker">01 / A little about me</div><h2>Curiosity drives<br>what I build.</h2></div><p class="section-intro">A hands-on learner exploring the intersection of software, hardware and design.</p></div>
+        <div class="about-grid">
+          <div class="panel reveal">
+            <p>I'm a student and hands-on technology enthusiast interested in web development, Python programming, robotics and digital design. I enjoy turning ideas into working projects and documenting what I build.</p>
+            <p>My projects include a Python chess game published on GitHub, a completed Arduino robotic arm and a completed Iron Man Mark III helmet model. I am always learning, experimenting and looking for opportunities to collaborate with other builders.</p>
+          </div>
+          <div class="facts reveal">
+            <div class="fact"><strong>HTML5</strong><small>Strong knowledge</small></div>
+            <div class="fact"><strong>Python</strong><small>Chess game project</small></div>
+            <div class="fact"><strong>Arduino</strong><small>Robotic arm project</small></div>
+            <div class="fact"><strong>3D Design</strong><small>Helmet modelling</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="shell">
+        <div class="section-head reveal"><div><div class="kicker">02 / Tools & technologies</div><h2>Skills & interests.</h2></div><p class="section-intro">Technologies I use and areas I explore through hands-on projects.</p></div>
+        <div class="skills">
+          <article class="skill reveal"><span class="skill-index">01</span><h3>HTML5</h3><p>Strong knowledge of page structure, semantic elements, links, forms, tables and multimedia.</p></article>
+          <article class="skill reveal"><span class="skill-index">02</span><h3>Python</h3><p>Programming applied in a completed chess game project published on GitHub.</p></article>
+          <article class="skill reveal"><span class="skill-index">03</span><h3>C++</h3><p>Learning C++ programming fundamentals and building problem-solving skills.</p></article>
+          <article class="skill reveal"><span class="skill-index">04</span><h3>Arduino & Robotics</h3><p>Hands-on experience building and completing a servo-controlled robotic arm.</p></article>
+          <article class="skill reveal"><span class="skill-index">05</span><h3>3D Modelling</h3><p>Digital design experience through an Iron Man Mark III helmet project.</p></article>
+          <article class="skill reveal"><span class="skill-index">06</span><h3>GitHub</h3><p>Publishing projects and sharing code with the developer community.</p></article>
+          <article class="skill reveal"><span class="skill-index">07</span><h3>Problem Solving</h3><p>Debugging, testing and improving projects through practical experimentation.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="shell">
+        <div class="section-head reveal"><div><div class="kicker">03 / Things I've built</div><h2>Selected projects.</h2></div><p class="section-intro">A selection of completed builds and what I am exploring next.</p></div>
+        <div class="projects">
+          <article class="project reveal"><div class="project-top"><h3>Python Chess Game</h3><span class="status">Completed</span></div><p>A chess game built with Python and published as a public GitHub project. This project helped me practise programming logic and game development.</p><div class="tags"><span>Python</span><span>Game Development</span><span>GitHub</span></div><a class="project-link" href="https://github.com/aarushmsharma2105" target="_blank" rel="noopener">Explore my GitHub projects ↗</a></article>
+          <article class="project reveal"><div class="project-top"><h3>Arduino Robotic Arm</h3><span class="status">Completed</span></div><p>A hands-on robotic arm build using Arduino and servo motors, exploring motion control and practical electronics.</p><div class="tags"><span>Arduino</span><span>C++</span><span>Servo motors</span><span>Robotics</span></div></article>
+          <article class="project reveal"><div class="project-top"><h3>Iron Man Mark III Helmet</h3><span class="status">Completed</span></div><p>A personal helmet modelling and maker project inspired by the Iron Man Mark III design, combining digital design and practical building.</p><div class="tags"><span>3D Modelling</span><span>Design</span><span>Maker Project</span></div></article>
+          <article class="project reveal"><div class="project-top"><h3>Personal Portfolio Website</h3><span class="status">In progress</span></div><p>This portfolio presents my skills, projects and learning journey. I am refining it as I develop my web skills.</p><div class="tags"><span>HTML</span><span>CSS</span><span>Responsive Design</span></div></article>
+          <article class="project reveal"><div class="project-top"><h3>AI Chatbot</h3><span class="status">Upcoming</span></div><p>An upcoming project to explore conversational AI and build a chatbot application.</p><div class="tags"><span>Python</span><span>Artificial Intelligence</span><span>Chatbot</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="shell">
+        <div class="contact reveal">
+          <div><div class="kicker">04 / Let's connect</div><h2>Have an idea or opportunity?</h2><p>I'm happy to connect, learn and collaborate on beginner-friendly projects.</p></div>
+          <div class="contact-links">
+            <a class="button primary" href="mailto:aarushmsharma2105@gmail.com">Email me ↗</a>
+            <a class="button secondary" href="https://www.linkedin.com/in/aarush-sharma-008a58443" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="button secondary" href="https://github.com/aarushmsharma2105" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="shell footer-inner"><span>© <span id="year">2026</span> Aarush Sharma · Designed with intention.</span><span>Made for the curious.</span></div></footer>
+
+  <script type="module">
+    import * as THREE from 'three';
+
+    const canvas = document.querySelector('#particle-canvas');
+    const host = canvas.parentElement;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const smallScreen = window.matchMedia('(max-width: 600px)').matches;
+    const particleCount = smallScreen ? 950 : 1850;
+
+    let renderer, scene, camera, points, positions, basePositions, velocities;
+    let frame = 0, isVisible = true, pointerActive = false;
+    const pointer = new THREE.Vector2(999, 999);
+    const clock = new THREE.Clock();
+
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !smallScreen, powerPreference: 'low-power' });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, smallScreen ? 1.35 : 1.7));
+      renderer.setSize(host.clientWidth, host.clientHeight, false);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(42, host.clientWidth / host.clientHeight, 0.1, 100);
+      camera.position.z = 8.6;
+
+      positions = new Float32Array(particleCount * 3);
+      basePositions = new Float32Array(particleCount * 3);
+      velocities = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+      const colorA = new THREE.Color('#344f3e');
+      const colorB = new THREE.Color('#91a995');
+
+      // A softly twisted spherical shell gives the particles a sculptural, dimensional silhouette.
+      for (let i = 0; i < particleCount; i++) {
+        const u = Math.random();
+        const v = Math.random();
+        const theta = 2 * Math.PI * u;
+        const phi = Math.acos(2 * v - 1);
+        const shell = 1.5 + 0.55 * Math.sin(phi * 5 + theta * 2) + (Math.random() - .5) * .18;
+        const x = shell * Math.sin(phi) * Math.cos(theta);
+        const y = shell * Math.sin(phi) * Math.sin(theta);
+        const z = shell * Math.cos(phi);
+        const j = i * 3;
+        positions[j] = basePositions[j] = x;
+        positions[j + 1] = basePositions[j + 1] = y;
+        positions[j + 2] = basePositions[j + 2] = z;
+        const c = colorA.clone().lerp(colorB, Math.random() * .72);
+        colors[j] = c.r; colors[j + 1] = c.g; colors[j + 2] = c.b;
+        velocities[j] = velocities[j + 1] = velocities[j + 2] = 0;
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      const material = new THREE.PointsMaterial({
+        size: smallScreen ? .036 : .041, vertexColors: true, transparent: true,
+        opacity: .98, sizeAttenuation: true, depthWrite: false, blending: THREE.NormalBlending
+      });
+      points = new THREE.Points(geometry, material);
+      scene.add(points);
+
+      const glow = new THREE.PointLight('#c4d3c5', 2.0, 12);
+      glow.position.set(2.8, 2.5, 4);
+      scene.add(glow);
+      scene.add(new THREE.AmbientLight('#ffffff', 1.1));
+
+      const resize = () => {
+        const w = host.clientWidth, h = host.clientHeight;
+        if (!w || !h) return;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, w < 600 ? 1.35 : 1.7));
+        renderer.setSize(w, h, false);
+      };
+      const resizeObserver = new ResizeObserver(resize);
+      resizeObserver.observe(host);
+
+      const setPointer = (event) => {
+        const rect = canvas.getBoundingClientRect();
+        pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        pointer.y = -(((event.clientY - rect.top) / rect.height) * 2 - 1);
+        pointerActive = true;
+      };
+      canvas.addEventListener('pointermove', setPointer, { passive: true });
+      canvas.addEventListener('pointerleave', () => { pointerActive = false; pointer.set(999, 999); }, { passive: true });
+      canvas.addEventListener('pointerdown', setPointer, { passive: true });
+
+      const observer = new IntersectionObserver(entries => { isVisible = entries[0].isIntersecting; }, { threshold: 0.05 });
+      observer.observe(host);
+      document.addEventListener('visibilitychange', () => { isVisible = !document.hidden; });
+
+      const animate = () => {
+        frame = requestAnimationFrame(animate);
+        if (!isVisible || document.hidden) return;
+        const elapsed = clock.getElapsedTime();
+        points.rotation.y = elapsed * .105;
+        points.rotation.x = Math.sin(elapsed * .18) * .12;
+        const p = pointerActive ? new THREE.Vector3(pointer.x * 3.3, pointer.y * 2.5, 0) : null;
+        const influenceRadiusSq = smallScreen ? 2.0 : 2.7;
+
+        // Gentle spring motion with a local pointer repulsion; capped delta keeps mobile stable.
+        for (let i = 0; i < particleCount; i++) {
+          const j = i * 3;
+          let tx = basePositions[j], ty = basePositions[j + 1], tz = basePositions[j + 2];
+          if (p) {
+            const dx = tx - p.x, dy = ty - p.y, dz = tz - p.z;
+            const d2 = dx * dx + dy * dy + dz * dz;
+            if (d2 < influenceRadiusSq && d2 > .0001) {
+              const force = (1 - d2 / influenceRadiusSq) * .42;
+              tx += dx * force * 3.0; ty += dy * force * 3.0; tz += dz * force * 2.0;
+            }
+          }
+          velocities[j] += (tx - positions[j]) * .018;
+          velocities[j + 1] += (ty - positions[j + 1]) * .018;
+          velocities[j + 2] += (tz - positions[j + 2]) * .018;
+          velocities[j] *= .91; velocities[j + 1] *= .91; velocities[j + 2] *= .91;
+          positions[j] += velocities[j]; positions[j + 1] += velocities[j + 1]; positions[j + 2] += velocities[j + 2];
+        }
+        points.geometry.attributes.position.needsUpdate = true;
+        renderer.render(scene, camera);
+      };
+
+      if (reducedMotion) {
+        renderer.render(scene, camera);
+      } else {
+        animate();
+      }
+      window.addEventListener('pagehide', () => cancelAnimationFrame(frame), { once: true });
+    } catch (error) {
+      console.warn('3D particle scene unavailable; showing a lightweight fallback.', error);
+      canvas.style.display = 'none';
+      host.style.background = 'radial-gradient(circle at 50% 45%, #dce7dc, #eff1ec 60%)';
+    }
+
+    document.querySelector('#year').textContent = new Date().getFullYear();
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+</body>
+</html>
